@@ -13,7 +13,7 @@ db = client.get_default_database()
 urls = db["urls"]
 
 db = client.get_default_database()
-
+link=''
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -22,25 +22,41 @@ def index():
 @app.route('/shorten',methods=["POST"])
 def shorten():
 
+
     link = request.form["website_url"]
     link=link.encode('utf-8')
-    hash_object = hashlib.md5(link)
-    code=hash_object.hexdigest()[:5]
-    DATA={}
-    DATA["url"]=link
-    DATA["_id"]=code
-    urls.insert_one(DATA)
-    collection = db.test_collection
+    try:
+        webchecking = requests.get(link,verify=False)
 
-    return code
+    except:
+        print(3)
+        return "not a website"
+    if webchecking.status_code != 200:
+
+        return "not a website"
+    else :
+        hash_object = hashlib.md5(link)
+        code=hash_object.hexdigest()[:5]
+
+    #website=urls.find_one({"_id":code})['url'].decode('ascii')
+        DATA={}
+        DATA["url"]=link
+        DATA["_id"]=code
+        urls.insert_one(DATA)
+
+        link=link
+        return code
 
 @app.route('/<link>')
 def generate(link):
-    link = request.form["code"]
-    
+    #  token=request.form["code"]
+    website=urls.find_one({"_id":link})['url'].decode('ascii')
+    # print(website)
+    return redirect(website, code=302)
 
 
-    return "2"
+
+
 
 
 

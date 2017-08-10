@@ -13,6 +13,12 @@
 
 <body>
   <div class="row">
+<div class="col-sm-4"></div>
+  <div id="title" class="col-sm-4 text-center center-block">
+    URL Shortener
+</div>
+</div>
+  <div class="row">
         <div class="col-md-3 col-xs-2"></div>
         <div class="col-md-6 col-xs-8">
             <div class="row">
@@ -28,8 +34,11 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="center-block text-center buttonstyle col-md-6"><button onclick="shortlink();">shorten</button></div>
-      <div class="col-md-3"></div>
+      <div class="col-md-3" >
+      </div>
     </div>
+    <br>
+    <div class="text-center center-block" id="alert_message" style=" display:none; font-family: 'Avenir Next'; font-size: 20px; color :pink;"> link is not valid</div>
 
 
 
@@ -99,6 +108,18 @@
         border: 0;
         outline: none !important;
     }
+    button{
+      background-color:#4D6864;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer
+    }
 
 
 </style>
@@ -139,8 +160,14 @@ function shortlink() {
             contentType: false,
             processData: false,
             success: function(response) {
-              console.log(response);
-              generate(response);
+              if(response==="not a website"){
+                document.getElementById("website_input").style.backgroundColor="pink";
+                document.getElementById("alert_message").style.display="block";
+
+
+              }
+
+
 
             }
         })
