@@ -39,7 +39,7 @@
     </div>
     <br>
     <div class="text-center center-block" id="alert_message" style=" display:none; font-family: 'Avenir Next'; font-size: 20px; color :pink;"> link is not valid</div>
-
+    <div class='text-center center-block' style=" color: #4D6864;font-family: 'Avenir Next'; position: fixed;bottom: 0; width: 100%;">Made by Yuxuan Zhao </div>
 
 
 </body>
@@ -169,6 +169,7 @@ function shortlink() {
               else{
               document.getElementById("website_input").style.backgroundColor="#F1FAF9";
               document.getElementById("alert_message").innerHTML="http://urls.yuxuanz.com/"+response;
+              document.getElementById("alert_message").style.color="#4D6864";
               document.getElementById("alert_message").style.display="block";
 
               console.log(response)
