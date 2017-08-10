@@ -37,15 +37,15 @@ def shorten():
     else :
         hash_object = hashlib.md5(link)
         code=hash_object.hexdigest()[:5]
-
-    #website=urls.find_one({"_id":code})['url'].decode('ascii')
+    try:
+        website=urls.find_one({"_id":code})['url'].decode('ascii')
+    except:
         DATA={}
         DATA["url"]=link
         DATA["_id"]=code
         urls.insert_one(DATA)
 
-        link=link
-        return code
+    return code
 
 @app.route('/<link>')
 def generate(link):
