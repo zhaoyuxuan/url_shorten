@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>shorten the link</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="row">
+        <div class="col-md-3 col-xs-2"></div>
+        <div class="col-md-6 col-xs-8">
+            <div class="row">
+                <div id="website">
+                    <span class="input_title">Enter Website</span>
+                    <h1 class="input_bar">
+                        <input class="input_field" id="website_input" name="website_input" type="text" ></input>
+                    </h1>
+                </div>
+            </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="center-block text-center buttonstyle col-md-6"><button onclick="shortlink();">shorten</button></div>
+      <div class="col-md-3"></div>
+    </div>
+
+
+
+</body>
+
+<style>
+  .buttonstyle{
+    border: none;
+    font-family: "Avenir Next";
+
+
+  }
+    #header {
+        padding-top: 50px;
+    }
+
+    #title {
+        color: #4D6864;
+        font-family: "Avenir Next";
+        font-size: 60px;
+        font-weight: 100;
+        letter-spacing: -4.5px;
+    }
+
+    #subtitle {
+        font-family: "Avenir Next";
+        font-size: 17px;
+        font-weight: 300;
+        letter-spacing: -1.1px;
+        color: #4D6864;
+    }
+
+    #website {
+        padding-top: 100px;
+    }
+
+    #verification {
+        padding-top: 70px;
+        padding-bottom: 100px;
+    }
+
+    .input_title {
+        position: absolute;
+        font-family: "Avenir Next";
+        font-weight: 300;
+        font-size: 1.8em;
+        color: #4D6864;
+        letter-spacing: -0.5px;
+        /*margin-top: 10px;*/
+    }
+
+    .input_bar {
+        width: 100%;
+    }
+
+    .input_field {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        height: 150px;
+        font-family: "Avenir Next";
+        font-weight: 400;
+        font-size: 1.5em;
+        letter-spacing: -1.5px;
+        color: #4D6864;
+        background-color: #F1FAF9;
+        border: 0;
+        outline: none !important;
+    }
+
+
+</style>
+
+
+<script>
+function generate(code){
+  var formData = new FormData();
+  formData.append("code", code);
+  $.ajax({
+      type: "POST",
+      url: "/<link>",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        console.log("1");
+
+      }
+  })
+
+
+
+
+}
+
+function shortlink() {
+        var formData = new FormData();
+        var website_url = document.getElementById("website_input").value;
+        formData.append("website_url", website_url);
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/shorten",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+              console.log(response);
+              generate(response);
+
+            }
+        })
+
+
+    }
+</script>
+
+
+
+</html>
+<!--
+
+#phoneBarTitle{
+    position: absolute;
+    font-family: "BG";
+    font-weight: 700;
+    font-size: 1.9em;
+    color: #463C70;
+    margin-top: 5px;
+}
+
+#phoneBar{
+    width: 100%;
+}
+
+#phoneInput{
+    width: 100%;
+    height: 100px;
+    font-family: "BG";
+    font-weight: 300;
+    font-size: 1.5em;
+    color: #463C70;
+    background-color: #F7F3FF;
+    border: 0;
+    outline: none !important;
+} -->
