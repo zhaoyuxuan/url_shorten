@@ -24,9 +24,8 @@ def shorten():
 
 
     link = request.form["website_url"]
-    link=link.encode('utf-8')
     is_valid=validators.url(link,public=False)
-    if not is_valid:
+    if (not is_valid):
 
         return "not a website"
     else :
