@@ -29,6 +29,7 @@ def shorten():
 
         return "not a website"
     else :
+        link=link.encode('utf-8')
         hash_object = hashlib.md5(link)
         code=hash_object.hexdigest()[:5]
     try:
