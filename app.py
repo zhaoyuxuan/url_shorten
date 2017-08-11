@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request,redirect,url_for
 import requests,os
-import sys,hashlib
+import sys,hashlib,validators
 from pymongo import MongoClient
 
 # DATA = {
@@ -25,13 +25,8 @@ def shorten():
 
     link = request.form["website_url"]
     link=link.encode('utf-8')
-    try:
-        webchecking = requests.get(link,verify=False)
-
-    except:
-        print(3)
-        return "not a website"
-    if webchecking.status_code != 200:
+    is_valid=validators.url(link,public=False)
+    if not is_valid:
 
         return "not a website"
     else :
