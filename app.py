@@ -18,6 +18,10 @@ link=''
 def index():
     return render_template('index.html')
 
+@app.route('/2736f')
+def index():
+    return '2736f'
+
 
 @app.route('/shorten',methods=["POST"])
 def shorten():
