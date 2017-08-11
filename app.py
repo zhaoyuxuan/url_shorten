@@ -19,7 +19,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/2736f')
-def index():
+def test():
     return '2736f'
 
 
