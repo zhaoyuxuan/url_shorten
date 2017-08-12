@@ -3,10 +3,6 @@ import requests,os
 import sys,hashlib,validators
 from pymongo import MongoClient
 
-# DATA = {
-#         "url": "https://www.maharsh.net",
-#         "_id": "32sd1"
-#         }
 app = Flask(__name__)
 client = MongoClient("mongodb://demo:demo@ds139761.mlab.com:39761/urlshort")
 db = client.get_default_database()
@@ -22,15 +18,11 @@ def index():
 def test():
     return '2736f'
 
-
 @app.route('/shorten',methods=["POST"])
 def shorten():
-
-
     link = request.form["website_url"]
     is_valid=validators.url(link,public=False)
     if (not is_valid):
-
         return "not a website"
     else :
         link=link.encode('utf-8')
@@ -43,7 +35,7 @@ def shorten():
         DATA["url"]=link
         DATA["_id"]=code
         urls.insert_one(DATA)
-
+    cur.close()
     return code
 
 @app.route('/<link>')
@@ -52,13 +44,5 @@ def generate(link):
     website=urls.find_one({"_id":link})['url'].decode('ascii')
     # print(website)
     return redirect(website, code=302)
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)
